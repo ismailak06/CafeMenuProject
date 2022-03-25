@@ -12,3 +12,5 @@ namespace Entities.Dtos.Category
         public int? ParentCategoryId { get; set; }
     }
 }
+
+
