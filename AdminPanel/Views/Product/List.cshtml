@@ -1,0 +1,103 @@
+﻿@using Entities.ViewModels.ProductController
+@model ListProductViewModel
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-container  kt-container--fluid ">
+        <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+                Products
+            </h3>
+        </div>
+    </div>
+</div>
+
+<div class="kt-portlet kt-portlet--mobile">
+    <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title">
+                Product List
+            </h3>
+        </div>
+        <div class="kt-portlet__head-toolbar">
+            <div class="kt-portlet__head-actions">
+                <a href="@Url.Action("Add", "Product")" class="btn btn-bold btn-label-success btn-sm">
+                    <i class="flaticon2-plus"></i>
+                    New Product
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="kt-portlet kt-portlet--mobile" id="fotografGalerisiPortlet">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">
+                            Products
+                        </h3>
+                    </div>
+                </div>
+                <div class="kt-portlet__body">
+                    <div class="row sortable" id="fotograf_sil">
+                        @foreach (var product in Model.ProductsDtos)
+                        {
+                            <div class="col-md-2 mb-4" id="@product.Id">
+                                <div class="card">
+                                    <img class="card-img-top" style="max-height:200px; object-fit:cover; object-position:center" src="~/content/img/@product.ImagePath">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-lg-row">
+                                            <div class="p-2">Name</div>
+                                            <div class="p-2">
+                                                <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success ">
+                                                    <label>
+                                                        @product.Name
+                                                    </label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-lg-row">
+                                            <div class="p-2">Category</div>
+                                            <div class="p-2">
+                                                <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success ">
+                                                    <label>
+                                                        @(Model.Categories.FirstOrDefault(m=>m.Id==product.CategoryId).Name)
+                                                    </label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-lg-row">
+                                            <div class="p-2">Price</div>
+                                            <div class="p-2">
+                                                <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success ">
+                                                    <label>
+                                                        @product.Price
+                                                    </label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <a href="@Url.Action("Edit",new { productId=product.Id})" class="btn btn-label btn-label-secondary col-12"><i class="fa fa-information"></i>&nbsp; Edit</a>
+                                            </div>
+                                            <div class="col-6">
+                                                <a href="@Url.Action("Delete",new { productId=product.Id})" class="btn btn-label btn-label-danger col-12"><i class="fa fa-information"></i>&nbsp; Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+<script src="~/content/js/controllers/product/product.js"></script>
+
+}

@@ -1,0 +1,78 @@
+﻿@using Entities.ViewModels.ProductController
+@model EditProductViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">
+                            Edit Product
+                        </h3>
+                    </div>
+                </div>
+                <div class="kt-portlet__body">
+                    <form class="kt-form" id="kt_user_add_form" asp-route="Edit" method="post" novalidate="novalidate" enctype="multipart/form-data">
+                        <input asp-for="EditProductDto.Id" type="hidden" />
+                        <div class="kt-wizard-v4__content" data-ktwizard-type="step-content" data-ktwizard-state="current">
+                            <div class="kt-section kt-section--first">
+                                <div class="kt-wizard-v4__form">
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="kt-section__body">
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Name</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <input class="form-control" type="text" asp-for=EditProductDto.Name>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Category</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <select class="form-control" asp-for="EditProductDto.CategoryId" id="categoryId" asp-items="@(new SelectList(Model.Categories,"Id","Name"))">
+                                                            <option value="@null">Select a category....</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Property</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        @foreach (var property in Model.PropertiesDtos)
+                                                        {
+                                                            var hasProperty = Model.ProductPropertyDtos.Any(m => m.ProductId == Model.EditProductDto.Id && m.PropertyId == property.Id);
+                                                            <div class="col-md-3">
+                                                                <label class="kt-checkbox kt-checkbox--success">
+                                                                    <input value="@property.Id" id="propertyIds" name="propertyIds" type="checkbox" @(hasProperty ? "checked":"")> @property.Key
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-xl-3 col-lg-3 col-form-label">Price</label>
+                                                    <div class="col-lg-9 col-xl-9">
+                                                        <input class="form-control" asp-for="EditProductDto.Price" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__foot kt-portlet__foot--fit py-2">
+                            <div class="kt-form__actions py-2">
+                                <button id="btnSubmit" type="submit" class="btn btn-success">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

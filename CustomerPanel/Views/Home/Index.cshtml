@@ -1,0 +1,70 @@
+﻿@using Entities.ViewModels.ProductController
+@model ListProductViewModel
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-container  kt-container--fluid ">
+        <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+                Products
+            </h3>
+        </div>
+    </div>
+</div>
+
+<div class="kt-portlet kt-portlet--height-fluid">
+    <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title">
+                Products
+            </h3>
+        </div>
+    </div>
+    <div class="kt-portlet__body">
+        <div class="tab-content">
+            <div class="tab-pane active" id="kt_widget5_tab1_content" aria-expanded="true">
+
+                <div class="kt-widget5">
+                    @foreach (var product in Model.ProductsDtos)
+                    {
+                        <div class="kt-widget5__item">
+                            <div class="kt-widget5__content">
+                                <div class="kt-widget5__pic">
+                                    <img class="kt-widget7__img" src="https://localhost:44384/content/img/@product.ImagePath" alt="">
+                                </div>
+                                <div class="kt-widget5__section">
+                                    <a href="#" class="kt-widget5__title">
+                                        @product.Name
+                                    </a>
+                                    <p class="kt-widget5__desc">
+                                        @Model.Categories.FirstOrDefault(m=>m.Id==product.CategoryId).Name
+                                    </p>
+                                    <div class="kt-widget5__info">
+                                        <span>Price: </span>
+                                        <span class="kt-font-info">@(product.Price)₺</span>
+                                        <span>Usd: </span>
+                                        <span class="kt-font-info">@product.PriceUsd</span>
+                                        <span>Eur: </span>
+                                        <span class="kt-font-info">@product.PriceEuro</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="kt-widget5__content">
+                                <div class="kt-widget5__stats">
+                                    <span class="kt-widget5__number"></span>
+                                    <span class="kt-widget5__sales"></span>
+                                </div>
+                                <div class="kt-widget5__stats">
+                                    <span class="kt-widget5__number"></span>
+                                    <span class="kt-widget5__votes"></span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

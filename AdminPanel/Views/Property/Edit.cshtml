@@ -1,0 +1,40 @@
+﻿@using Entities.ViewModels.PropertyController
+@model EditPropertyViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">
+                            Edit Property
+                        </h3>
+                    </div>
+                </div>
+                <div class="kt-portlet__body">
+                    <form asp-controller="Property" asp-action="Edit" method="post">
+                        <input asp-for="EditPropertyDto.Id" type="hidden" />
+                        <div class="form-group m-form__group">
+                            <label>Key</label>
+                            <input type="text" asp-for="EditPropertyDto.Key" class="form-control m-input">
+                            <span asp-validation-for="EditPropertyDto.Key"></span>
+                        </div> <div class="form-group m-form__group">
+                            <label>Value</label>
+                            <textarea asp-for="EditPropertyDto.Value" rows="3" cols="40" class="form-control m-input"></textarea>
+                        </div>
+                        <div class="kt-portlet__foot kt-portlet__foot--fit py-2">
+                            <div class="kt-form__actions py-2">
+                                <button id="btnSubmit" type="submit" class="btn btn-success">Edit Property</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

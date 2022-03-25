@@ -1,0 +1,42 @@
+﻿@using Entities.ViewModels.CategoryController
+@model EditCategoryViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">
+                            Edit Category
+                        </h3>
+                    </div>
+                </div>
+                <div class="kt-portlet__body">
+                    <form asp-controller="Category" asp-action="Edit" method="post">
+                        <input asp-for="EditCategoryDto.Id" type="hidden" />
+                        <div class="form-group m-form__group">
+                            <label>Category Name</label>
+                            <input type="text" asp-for="EditCategoryDto.Name" class="form-control m-input categoryName">
+                            <span asp-validation-for="EditCategoryDto.Name"></span>
+                        </div> <div class="form-group m-form__group">
+                            <label>Parent Category</label>
+                            <select class="form-control" asp-for="EditCategoryDto.ParentCategoryId" asp-items="@(new SelectList(Model.Categories,"Id","Name"))">
+                                <option value="@null">Select a parent category....</option>
+                            </select>
+                        </div>
+                        <div class="kt-portlet__foot kt-portlet__foot--fit py-2">
+                            <div class="kt-form__actions py-2">
+                                <button id="btnSubmit" type="submit" class="btn btn-success">Edit Category</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
