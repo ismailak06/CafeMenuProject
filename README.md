@@ -4,7 +4,7 @@ Clone from GitHub
 git clone https://github.com/ismailak06/CafeMenuProject
 ```
 ## Database Migration
-*Make sure connection string is correct*
+*Make sure [connection string](https://github.com/ismailak06/CafeMenuProject/blob/master/DataAccess/Concrete/EntityFramework/Contexts/CMPDbContext.cs#L34) is correct*
 <br><br>
 Firstly, install dotnet tool if it does not have
 ```git bash
