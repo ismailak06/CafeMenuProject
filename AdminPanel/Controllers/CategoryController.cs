@@ -3,6 +3,7 @@ using Business.Utilities.AutoMapper;
 using Entities.Dtos.Category;
 using Entities.ViewModels.CategoryController;
 using Microsoft.AspNetCore.Mvc;
+using AdminPanel.Functions.Validation.FluentValidation;
 
 namespace AdminPanel.Controllers
 {
@@ -36,9 +37,11 @@ namespace AdminPanel.Controllers
         [HttpPost, Route("add")]
         public IActionResult AddCategory(AddCategoryViewModel model)
         {
+            ModelState.Clear();
             var addedCategory = _categoryService.Create(model.AddCategoryDto);
             if (!addedCategory.Success)
             {
+                ModelState.ValidateModel(addedCategory.ValidationErrors, nameof(AddCategoryDto));
                 model.Categories = _categoryService.GetList();
                 return View(model);
             }

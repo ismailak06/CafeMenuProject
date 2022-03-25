@@ -23,7 +23,7 @@ namespace DataAccess.Concrete.EntityFramework.Configurations
 
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash("123456", out passwordHash, out passwordSalt);
-            builder.HasData(new User { Id=1, Name = "thos", SaltPassword = passwordSalt, HashPassword = passwordHash });
+            builder.HasData(new User { Id = 1, Name = "thos", Surname = "software", Username = "thos", SaltPassword = passwordSalt, HashPassword = passwordHash });
         }
     }
 }
