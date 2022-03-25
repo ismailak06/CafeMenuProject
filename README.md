@@ -18,13 +18,17 @@ to build database run in PMC:
 ```git bash
 dotnet ef database update --project DataAccess
 ```
+
+*You should enable multiple startup and select AdminPanel, CustomerPanel projects*
+
+## Login
 When you build the database you can start the project and you can login with default user:
 <br><br>
 Username: <b>thos</b> <br>
 Password: <b>123456</b>
 <br> <br>
 
-You should enable multiple startup and select AdminPanel, CustomerPanel projects
+
 
 ## Technologies
 - .Net 5.0
