@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Entities.ViewModels.AuthController
+@model LoginUserViewModel
+@{
     ViewData["Title"] = "Admin Panel Giriş";
     Layout = null;
 }
@@ -68,16 +70,19 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="kt-login__head">
                                 <h3 class="kt-login__title">Sign In To Admin</h3>
                             </div>
-                            <form class="kt-form" action="">
+                            <form class="kt-form" asp-route="Login" method="post">
                                 <div class="input-group">
-                                    <input class="form-control" type="text" placeholder="Username" name="username" id="tbUserName" autocomplete="off">
+                                    <input asp-for="LoginUserDto.Username" class="form-control" type="text" placeholder="Username" autocomplete="off">
+
+                                    <span asp-validation-for="LoginUserDto.Username" class="form-control-feedback text-danger"></span>
                                 </div>
                                 <div class="input-group">
-                                    <input class="form-control" type="password" placeholder="Password" id="tbPassword" name="password">
+                                    <input asp-for="LoginUserDto.Password" class="form-control" type="password" placeholder="Password" >
+                                    <span asp-validation-for="LoginUserDto.Password" class="form-control-feedback text-danger"></span>
                                 </div>
 
                                 <div class="kt-login__actions">
-                                    <button id="kt_login_signin_submit" class="btn btn-pill kt-login__btn-primary">Sign In</button>
+                                    <button type="submit" class="btn btn-pill kt-login__btn-primary">Sign In</button>
                                 </div>
                             </form>
                         </div>

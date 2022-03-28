@@ -5,14 +5,11 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.Dtos.Product;
-using Entities.Dtos.ProductProperty;
 using Entities.Dtos.Property;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace Business.Concrete
@@ -20,13 +17,11 @@ namespace Business.Concrete
     public class ProductManager : IProductService
     {
         private readonly IProductDal _productDal;
-        private readonly IProductPropertyService _productPropertyService;
         private const string USD = "USD";
         private const string EURO = "EUR";
-        public ProductManager(IProductDal productDal, IProductPropertyService productPropertyService)
+        public ProductManager(IProductDal productDal)
         {
             _productDal = productDal;
-            _productPropertyService = productPropertyService;
         }
 
         public IDataResult<Product> Create(AddProductDto addProductDto)
@@ -70,9 +65,6 @@ namespace Business.Concrete
 
             var updatedProduct = _productDal.Update(product);
 
-            //var editProductProperty = _productPropertyService.
-            //_productPropertyService.Update(editProductProperty);
-
             return new SuccessDataResult<Product>(updatedProduct);
         }
 
@@ -95,7 +87,7 @@ namespace Business.Concrete
         }
         public IDataResult<List<ProductDto>> GetListWithProperties()
         {
-            var productList = _productDal.GetQueryableList.Where(m => !m.IsDeleted)
+            var productList = _productDal.GetQueryableList
                 .Include(m => m.ProductProperties)
                 .ThenInclude(m => m.Property).ToList();
 

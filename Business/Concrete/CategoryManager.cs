@@ -66,7 +66,7 @@ namespace Business.Concrete
 
         public IList<CategoriesDto> GetList()
         {
-            return Mapping.Mapper.Map<List<CategoriesDto>>(_categoryDal.GetList(m => !m.IsDeleted));
+            return Mapping.Mapper.Map<List<CategoriesDto>>(_categoryDal.GetList());
         }
 
         public Category GetById(int categoryId)

@@ -1,4 +1,5 @@
 ﻿using DataAccess.Concrete.EntityFramework.Configurations;
+using DataAccess.Concrete.EntityFramework.Configurations.Common;
 using Entities.Common;
 using Entities.Common.Interfaces;
 using Entities.Concrete;

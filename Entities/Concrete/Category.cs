@@ -5,7 +5,7 @@ using System;
 
 namespace Entities.Concrete
 {
-    public class Category : AuditableEntity, IEntity, ISoftDelete
+    public class Category : AuditableEntity, ISoftDelete, IEntity
     {
         private string _name;
         public string Name

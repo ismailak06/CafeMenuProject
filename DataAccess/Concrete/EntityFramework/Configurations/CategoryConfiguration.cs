@@ -10,6 +10,7 @@ namespace DataAccess.Concrete.EntityFramework.Configurations
         public void Configure(EntityTypeBuilder<Category> builder)
         {
             AuditableEntityConfiguration<Category>.SetProperties(builder);
+            SoftDeleteConfiguration<Category>.SetProperties(builder);
 
             builder.ToTable("Categories");
             builder.Property(p => p.Name);

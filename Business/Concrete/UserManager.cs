@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Utilities.AutoMapper;
+using Business.ValidationRules.FluentValidation.Entities.Auth;
 using Business.ValidationRules.FluentValidation.Entities.User;
 using Core.Utilities.Results;
 using Core.Utilities.Security.Hashing;
@@ -74,14 +75,14 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(deletedUser);
         }
 
-        public IDataResult<bool> CheckExistsUserName(string userName)
+        public IDataResult<bool> CheckExistsUserName(string username)
         {
-            return new SuccessDataResult<bool>(_userDal.Any(m => m.Username == userName));
+            return new SuccessDataResult<bool>(_userDal.Any(m => m.Username == username));
         }
 
-        public User GetUserByUserName(LoginUserDto loginUserDto)
+        public User GetByUserName(string username)
         {
-            return _userDal.Get(m => m.Username == loginUserDto.Username);
+            return _userDal.Get(m => m.Username == username);
         }
 
         public IList<UserDto> GetList()
@@ -96,17 +97,15 @@ namespace Business.Concrete
 
         public IDataResult<UserDto> CheckLogin(LoginUserDto loginUserDto)
         {
+            var validator = new LoginUserValidator(this);
+            var validateResult = validator.Validate(loginUserDto);
+            if (!validateResult.IsValid)
+            {
+                var errorResults = ValidationHelper.GetErrors(validateResult.Errors);
+                return new ErrorDataResult<UserDto>("Hata.", errorResults);
+            }
+
             var userDto = _userDal.Get(m => m.Username == loginUserDto.Username);
-        
-            if(userDto is null)
-            {
-                return new ErrorDataResult<UserDto>("Kullanıcı adı veya şifre geçersiz.");
-            }
-       
-            if (!HashingHelper.VerifyPasswordHash(loginUserDto.Password, userDto.HashPassword, userDto.SaltPassword))
-            {
-                return new ErrorDataResult<UserDto>("Kullanıcı adı veya şifre geçersiz.");
-            }
 
             return new SuccessDataResult<UserDto>(Mapping.Mapper.Map<UserDto>(userDto));
         }

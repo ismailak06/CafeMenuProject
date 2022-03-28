@@ -1,7 +1,10 @@
-﻿using Business.Abstract;
+﻿using AdminPanel.Functions.Validation.FluentValidation;
+using Business.Abstract;
 using Business.Utilities.Security;
 using Core.Utilities.Results;
+using Entities.Dtos.Category;
 using Entities.Dtos.User;
+using Entities.ViewModels.AuthController;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +12,7 @@ using System.Security.Claims;
 
 namespace AdminPanel.Controllers
 {
-
+    [Route("auth")]
     public class AuthController : Controller
     {
         private IUserService _userService;
@@ -21,22 +24,26 @@ namespace AdminPanel.Controllers
             _userService = userService;
         }
 
+        [Route("login")]
         public IActionResult Login()
         {
-            return View();
+            LoginUserViewModel model = new LoginUserViewModel();
+            return View(model);
         }
 
-        [HttpPost]
-        public IActionResult Login(LoginUserDto loginUserDto)
+        [HttpPost, Route("login")]
+        public IActionResult Login(LoginUserViewModel model)
         {
-            var login = _userService.CheckLogin(loginUserDto);
+            ModelState.Clear();
+            var login = _userService.CheckLogin(model.LoginUserDto);
             if (!login.Success)
             {
-                return View(login);
+                ModelState.ValidateModel(login.ValidationErrors, nameof(LoginUserDto));
+                return View(model);
             }
             _authorizationHelper.SignIn(login.Data);
-          
-            return Json(true );
+
+            return Redirect("/");
         }
 
         public IActionResult Logout()

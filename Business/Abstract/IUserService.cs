@@ -11,11 +11,10 @@ namespace Business.Abstract
         IDataResult<User> Create(AddUserDto addUserDto);
         IDataResult<User> Update(EditUserDto updateUserDto);
         IDataResult<User> Delete(int userId);
-        IDataResult<bool> CheckExistsUserName(string userName);
+        IDataResult<bool> CheckExistsUserName(string username);
         IList<UserDto> GetList();
-        User GetUserByUserName(LoginUserDto loginUserDto);
+        User GetByUserName(string username);
         UserDto GetById(int userId);
         IDataResult<UserDto> CheckLogin(LoginUserDto loginUserDto);
-
     }
 }

@@ -92,21 +92,21 @@ var KTLoginGeneral = function () {
                 return;
             }
 
-            btn.addClass('kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light').attr('disabled', true);
-            var username = $('#tbUserName').val();
-            var password = $('#tbPassword').val();
-            var postData = { UserName: username, Password: password };
-            $.ajax({
-                url: "/auth/login",
-                type: 'POST',
-                data: postData,
-                dataType: "json",
-                success: function (response) {
-                    if (response == true) {
-                        window.location.href = "/";
-                    }
-                }
-            });
+            //btn.addClass('kt-spinner kt-spinner--right kt-spinner--sm kt-spinner--light').attr('disabled', true);
+            //var username = $('#tbUserName').val();
+            //var password = $('#tbPassword').val();
+            //var postData = { "LoginUserDto.UserName": username, "LoginUserDto.Password": password };
+            //$.ajax({
+            //    url: "/auth/login",
+            //    type: 'POST',
+            //    data: postData,
+            //    dataType: "json",
+            //    success: function (response) {
+            //        if (response == true) {
+            //            window.location.href = "/";
+            //        }
+            //    }
+            //});
             /*  form.ajaxSubmit({
                  url: '',
                  success: function(response, status, xhr, $form) {
