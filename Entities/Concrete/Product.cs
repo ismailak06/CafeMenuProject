@@ -22,19 +22,7 @@ namespace Entities.Concrete
                 _name = value;
             }
         }
-        private int _categoryId;
-        public int CategoryId
-        {
-            get => _categoryId;
-            set
-            {
-                if (value <= 0)
-                {
-                    throw new ArgumentOutOfRangeException("CategoryId cannot be less than zero");
-                }
-                _categoryId = value;
-            }
-        }
+        public int? CategoryId { get; set; }
         private decimal _price;
         public decimal Price
         {

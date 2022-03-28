@@ -12,7 +12,6 @@ namespace Business.Abstract
         IDataResult<Category> Delete(int categoryId);
         IList<CategoriesDto> GetList();
         Category GetById(int categoryId);
-
         IList<Category> CheckChildCategory(int categoryId);
     }
 }

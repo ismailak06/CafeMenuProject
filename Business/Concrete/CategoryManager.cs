@@ -11,11 +11,13 @@ namespace Business.Concrete
 {
     public class CategoryManager : ICategoryService
     {
+        private readonly IProductService _productService;
         private readonly ICategoryDal _categoryDal;
 
-        public CategoryManager(ICategoryDal categoryDal)
+        public CategoryManager(ICategoryDal categoryDal, IProductService productService)
         {
             _categoryDal = categoryDal;
+            _productService = productService;
         }
 
         public IDataResult<Category> Create(AddCategoryDto addCategoryDto)
@@ -61,6 +63,9 @@ namespace Business.Concrete
             }
 
             var deletedCategory = _categoryDal.Delete(category);
+
+            _productService.UpdateRangeByDeletedCategoryId(deletedCategory.Id);
+
             return new SuccessDataResult<Category>(deletedCategory);
         }
 

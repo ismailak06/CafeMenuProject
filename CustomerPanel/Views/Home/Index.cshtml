@@ -39,7 +39,10 @@
                                         @product.Name
                                     </a>
                                     <p class="kt-widget5__desc">
-                                        @Model.Categories.FirstOrDefault(m=>m.Id==product.CategoryId).Name
+                                        @if (product.CategoryId > 0)
+                                        {
+                                            @Model.Categories.FirstOrDefault(m=>m.Id==product.CategoryId).Name
+                                        }
                                     </p>
                                     <div class="kt-widget5__info">
                                         <span>Price: </span>

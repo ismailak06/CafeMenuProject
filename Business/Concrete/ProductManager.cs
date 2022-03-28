@@ -112,5 +112,16 @@ namespace Business.Concrete
             var product = _productDal.GetById(productId);
             return new SuccessDataResult<Product>(product);
         }
+
+        public IDataResult<List<ProductDto>> UpdateRangeByDeletedCategoryId(int deletedCategoryId)
+        {
+            var products = _productDal.GetList(m => m.CategoryId == deletedCategoryId);
+            foreach (var product in products)
+            {
+                product.CategoryId = null;
+            }
+            var updatedProducts = _productDal.UpdateRange(products);
+            return new SuccessDataResult<List<ProductDto>>(Mapping.Mapper.Map<List<ProductDto>>(updatedProducts));
+        }
     }
 }

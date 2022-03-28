@@ -12,5 +12,6 @@ namespace Business.Abstract
         IDataResult<Product> Delete(int productId);
         IDataResult<List<ProductDto>> GetListWithProperties();
         IDataResult<Product> GetById(int productId);
+        IDataResult<List<ProductDto>> UpdateRangeByDeletedCategoryId(int deletedCategoryId);
     }
 }
